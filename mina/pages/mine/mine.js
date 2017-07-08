@@ -57,36 +57,52 @@ Page({
     )
   },
 
-  //重新请求使用用户信息的授权
+  //检测使用用户信息的授权，若无权，请求权限
   reGetUserInfo: function () {
     console.log('reGetUserInfo~~~');
     let that = this
-    wx.openSetting({
-      success:(res)=>{
-        let balbal = that
-        console.log(that.data.test);
-        console.log("授权结果..")
-        console.log(res)
-          res.authSetting = {
-           "scope.userInfo": true,
-         }
-         getApp().logIn()
-         .then(
-           (res) => {
-             console.log("NEW PROMISE!!!")
-             that.setData({
-               test: true,
-               userInfo: wx.getStorageSync('user'),
-             })
-           }
-         )
-         .catch(
-           (err) => {
-             console.log(err);
-           }
-         )
+
+    wx.getSetting({
+      success: (res) => {
+        console.log(res);
+        if(res.authSetting['scope.userInfo']){
+          console.log("we already got authorization to use userInfo!");
+          that.reLogin()
+        }else {
+          wx.openSetting({
+            success:(res)=>{
+              let balbal = that
+              console.log(that.data.test);
+              console.log("授权结果..")
+              console.log(res)
+                res.authSetting = {
+                 "scope.userInfo": true,
+               }
+               that.reLogin()
+             }
+           })
+        }
       }
     })
+  },
+
+  //登录：获取token
+  reLogin: function() {
+    getApp().logIn()
+    .then(
+      (res) => {
+        console.log("NEW PROMISE!!!")
+        this.setData({
+          test: true,
+          userInfo: wx.getStorageSync('user'),
+        })
+      }
+    )
+    .catch(
+      (err) => {
+        console.log(err);
+      }
+    )
   },
 
   //退出登录

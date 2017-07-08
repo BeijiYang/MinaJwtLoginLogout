@@ -5,6 +5,7 @@ App({
     this.logIn()
  },
   logIn: function() {
+    console.log("logInloginlogin");
     return new Promise(function(resolve,reject){
       wx.login({
         success: (res) => {
