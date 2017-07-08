@@ -4,27 +4,40 @@ var app = getApp()
 Page({
   data: {
     userInfo: {},
-    // wx.getStorageSync('user'),
     beforeLogin: '登录',
     test: false
-    // !!wx.getStorageSync('user'),
+  },
 
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    // app.getUserInfo(function(userInfo){
-    //   //更新数据
-    //   that.setData({
-    //     userInfo:userInfo
-    //   })
-    // })
-  }
+    const value = wx.getStorageSync('user')
+    this.setData({ userInfo: value })
+  },
+
+  //检测onlunch时是否成功取得用户信息
+  onShow: function () {
+    try {
+      var userInfo = wx.getStorageSync('user')
+      if (userInfo) {
+        this.setData({
+          test: true,
+        })
+        }
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  
+  //退出登录
+  quit: function() {
+    try {
+      wx.removeStorageSync('token')
+      wx.removeStorageSync('user')
+      this.setData({
+        userInfo: {},
+        test: false,
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  },
 })
