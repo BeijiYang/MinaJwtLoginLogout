@@ -2,6 +2,6 @@
 
 * 用 JSON Web Token 规范, 来完成小程序后端服务器 和 小程序客户端 之间的登录态校验
 * 流程图如下
-  * ![流程图](./flowChart.svg)
+  * ![流程图](./flowChart.png)
 * 动图如下
   * ![动图演示](./loginDemo.gif)
