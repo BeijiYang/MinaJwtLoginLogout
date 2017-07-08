@@ -40,7 +40,29 @@ App({
           }
         }
       });
-
       })
     },
+
+    checkToken: function() {
+      console.log('Promise');
+      const token = wx.getStorageSync('token')
+      return new Promise(function(resolve,reject){
+        wx.request({
+          url: `${config.api}/auth`,
+          header: {
+            'authorization': token
+          },
+          method: 'POST',
+          success (res) {
+            console.log(res);
+            resolve(res)
+          },
+          fail (err) {
+            console.log(err);
+            reject(err)
+          }
+        })
+      })
+    },
+    switch: false
 })
