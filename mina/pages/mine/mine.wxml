@@ -8,9 +8,9 @@
   <view class="orders">
     <ul>
       <li wx:if="{{test}}" bindtap="quit">
-        <navigator url=''>
+        <view>
           退出登录
-        </navigator>
+        </view>
       </li>
     </ul>
   </view>
