@@ -2,6 +2,7 @@
 <view class="container">
    <view class="header" bindtap="login">
       <image wx:if="{{userInfo}}" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '../../images/avatarIcon.svg'}}" bindtap="reGetUserInfo" class="avatar" />
+      <image wx:else src="../../images/avatarIcon.svg" class="avatarIcon" />
     <view class="name">{{userInfo.nickName ? userInfo.nickName : beforeLogin}}</view>
   </view>
   <button wx:if="{{test}}" bindtap="quit">退出登录</button>
