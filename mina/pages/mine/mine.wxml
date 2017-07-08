@@ -1,5 +1,22 @@
 <!--index.wxml-->
 <view class="container">
+   <view class="header" bindtap="login">
+      <image wx:if="{{userInfo}}" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '../../images/avatarIcon.svg'}}" bindtap="reGetUserInfo" class="avatar" />
+      <image wx:else src="../../images/avatarIcon.svg" class="avatarIcon" />
+    <view class="name">{{userInfo.nickName ? userInfo.nickName : beforeLogin}}</view>
+  </view>
+  <view class="orders">
+    <ul>
+      <li wx:if="{{test}}" bindtap="quit">
+        <navigator url=''>
+          退出登录
+        </navigator>
+      </li>
+    </ul>
+  </view>
+</view>
+
+<!-- <view class="container">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
@@ -7,4 +24,4 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
-</view>
+</view> -->

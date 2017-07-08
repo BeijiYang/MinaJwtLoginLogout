@@ -3,8 +3,12 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {}
+    userInfo: {},
+    // wx.getStorageSync('user'),
+    beforeLogin: '登录',
+    test: false
+    // !!wx.getStorageSync('user'),
+
   },
   //事件处理函数
   bindViewTap: function() {
