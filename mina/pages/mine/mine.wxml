@@ -5,23 +5,5 @@
       <image wx:else src="../../images/avatarIcon.svg" class="avatarIcon" />
     <view class="name">{{userInfo.nickName ? userInfo.nickName : beforeLogin}}</view>
   </view>
-  <view class="orders">
-    <ul>
-      <li wx:if="{{test}}" bindtap="quit">
-        <view>
-          退出登录
-        </view>
-      </li>
-    </ul>
-  </view>
+  <button wx:if="{{test}}" bindtap="quit">退出登录</button>
 </view>
-
-<!-- <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view> -->
