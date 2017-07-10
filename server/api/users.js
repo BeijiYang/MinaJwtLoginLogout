@@ -36,3 +36,38 @@ exports.login = (req, res) => {
          console.log(error)
        })
      }
+
+     exports.checkToken = (req, res) => {
+         let token = req.headers.authorization;
+         console.log(token);
+         if(token) {
+           console.log('token exist');
+           jwt.verify(token, config.jwtSecret, (err, decoded) => {
+             console.log('jwt.verify');
+             if(err) {
+               console.log('err');
+               if(err.name === 'TokenExpiredError') {
+                 console.log('认证码失效，请重新登录!');
+                 return res.status(401).json({ error: '认证码失效，请重新登录!' });
+               } else {
+                 console.log('认证失败！');
+                 return res.status(401).json({ error: '认证失败！'});
+               }
+             } else {
+               if(decoded.openid) {
+                 req.openid = decoded.openid;
+                 console.log('req.openid = decoded.openid;');
+                 return res.status(200).json({ message: '已登录'});
+               } else {
+                   console.log('认证失败！');
+                 res.status(401).json({ error: '认证失败！'});
+               }
+             }
+           });
+         } else {
+           console.log("no token");
+           return res.status(403).json({
+             error: '请提供认证码！'
+           });
+         }
+     }
