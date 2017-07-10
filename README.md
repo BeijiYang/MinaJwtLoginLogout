@@ -6,7 +6,7 @@
  增加了与之配合的后台代码。
   * node.js (express)
 
-## 前台登录相关流程如下
+## 前台登录功能 流程如下
    ![流程图](./flowChart.png)
 ## 动图如下
    ![动图演示](./loginDemo.gif)
